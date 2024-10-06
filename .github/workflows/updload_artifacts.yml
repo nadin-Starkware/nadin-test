@@ -17,7 +17,7 @@ jobs:
         run: echo "SHORT_HASH=${COMMIT_SHA:0:7}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.COMMIT_SHA }}
+          ref: ${{ env.SHORT_HASH }}
 
       - name: Verify current branch
         run: git branch --show-current
