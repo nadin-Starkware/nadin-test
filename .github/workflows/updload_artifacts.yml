@@ -14,10 +14,12 @@ jobs:
         # if: ${{ github.event_name == 'pull_request' }}
         env:
           COMMIT_SHA: ${{ github.event.workflow_run.head_commit.id }}
-        run: echo "SHORT_HASH=${COMMIT_SHA:0:7}" >> $GITHUB_ENV
+        run: |
+          echo "SHORT_HASH=${COMMIT_SHA:0:7}" >> $GITHUB_ENV
+          echo "COMMIT_SHA=${COMMIT_SHA}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.SHORT_HASH }}
+          ref: ${{ env.COMMIT_SHA }}
 
       - name: Verify current branch
         run: git branch --show-current
