@@ -10,9 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Commit hash - 1
+        # if: ${{ github.event_name == 'pull_request' }}
+        env:
+          COMMIT_SHA: ${{ github.event.workflow_run.head_commit.id }}
+        run: echo "SHORT_HASH=${COMMIT_SHA:0:7}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_commit.id }}
+          ref: ${{ env.COMMIT_SHA }}
 
       - name: Verify current branch
         run: git branch --show-current
@@ -22,11 +27,6 @@ jobs:
         with:
           credentials_json: ${{ secrets.NADIN_TEST_FORK_BUCKET_ACCESS_KEY }}
 
-      - name: Commit hash - 1
-        # if: ${{ github.event_name == 'pull_request' }}
-        env:
-          COMMIT_SHA: ${{ github.event.workflow_run.head_commit.id }}
-        run: echo "SHORT_HASH=${COMMIT_SHA:0:7}" >> $GITHUB_ENV
 
       - name: ls
         run: ls
