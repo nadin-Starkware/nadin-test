@@ -34,6 +34,8 @@ jobs:
           echo "The workflow run number is: ${{ github.run_number }}"
           echo "The workflow run name is: ${{ github.run_id }}"
 
+      - name: Set GH_TOKEN for GitHub CLI
+        run: echo "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
       - name: Get PR Number 1
           # if: github.event.workflow_run.pull_requests != ''
