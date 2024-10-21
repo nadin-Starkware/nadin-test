@@ -62,7 +62,7 @@ jobs:
               issue_number: process.env.PR_NUMBER,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "This is a comment added by the workflow."
+              body: "Upload artifacts run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             })
 
       - name: Authenticate with GCS
