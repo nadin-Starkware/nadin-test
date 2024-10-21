@@ -26,19 +26,19 @@ jobs:
 
       - name: the workflow run URL
         run: |
-          echo "The workflow run URL is: $GITHUB_RUN_URL"
+          echo "The workflow run URL is: ${{ env.GITHUB_RUN_URL }}"
+          echo "The workflow run GITHUB_API_URL is: ${{ env.GITHUB_API_URL}}"
+          echo "*******"
+          echo "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          echo "*******"
+          echo "The workflow run number is: ${{ github.run_number }}"
+          echo "The workflow run name is: ${{ github.run_id }}"
+
 
       - name: Get PR Number
           # if: github.event.workflow_run.pull_requests != ''
         run: |
-          if [[ "${{ toJson(github.event.workflow_run.pull_requests) }}" != "[]" ]]; then
-            pr_number=$(echo "${{ toJson(github.event.workflow_run.pull_requests) }}" | jq -r '.[0].number')
-            echo "PR number is $pr_number"
-            echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
-          else
-            echo "No pull request found"
-            echo "PR_NUMBER=" >> $GITHUB_ENV
-          fi
+          echo " pr num: ${{ github.event.workflow_run.event.number }}"
 
       - name: Authenticate with GCS
         uses: "google-github-actions/auth@v2"
