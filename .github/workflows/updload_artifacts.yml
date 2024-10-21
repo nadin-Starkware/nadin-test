@@ -24,6 +24,13 @@ jobs:
       - name: Verify current branch
         run: git branch --show-current
 
+      - name: Get PR Number
+          # if: github.event.workflow_run.pull_requests != ''
+        run: |
+          pr_number=$(echo "${{ toJson(github.event.workflow_run.pull_requests) }}" | jq '.[0].number')
+          echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
+          echo "The workflow run URL is: $GITHUB_RUN_URL"
+
       - name: Authenticate with GCS
         uses: "google-github-actions/auth@v2"
         with:
