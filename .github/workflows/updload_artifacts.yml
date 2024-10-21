@@ -48,7 +48,7 @@ jobs:
       - name: Get Pull Request Number - 2
         id: get_pr
         run: |
-          pr=$(gh pr list --head ${{ github.event.workflow_run.head_branch }} --state open --json number --jq '.[0].number')
+          pr=39
           echo "PR_NUMBER=$pr" >> $GITHUB_ENV
           echo "pr num is: $pr"
 
