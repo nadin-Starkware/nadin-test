@@ -35,22 +35,22 @@ jobs:
           echo "The workflow run name is: ${{ github.run_id }}"
 
 
-      # - name: Get PR Number 1
-      #     # if: github.event.workflow_run.pull_requests != ''
-      #   run: |
-      #     pr_number=$(echo "${{ toJson(github.event.workflow_run.pull_requests) }}" | jq '.[0].number')
-      #     echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
-      #     echo "The workflow run URL is: $GITHUB_RUN_URL"
+      - name: Get PR Number 1
+          # if: github.event.workflow_run.pull_requests != ''
+        run: |
+          pr_number=$(gh pr list --head "${{ github.event.workflow_run.head_branch }}" --json number --jq '.[0].number')
+          echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
+          echo "The workflow run URL is: $GITHUB_RUN_URL"
 
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get Pull Request Number - 2
-        id: get_pr
-        run: |
-          pr=39
-          echo "PR_NUMBER=$pr" >> $GITHUB_ENV
-          echo "pr num is: $pr"
+      # - name: Get Pull Request Number - 2
+      #   id: get_pr
+      #   run: |
+      #     pr=39
+      #     echo "PR_NUMBER=$pr" >> $GITHUB_ENV
+      #     echo "pr num is: $pr"
 
       - name: Add a comment to the PR
         if: env.PR_NUMBER != ''
