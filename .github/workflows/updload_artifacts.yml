@@ -61,11 +61,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const workflowLink = process.env.WORKFLOW_LINK;
             github.rest.issues.createComment({
               issue_number: process.env.PR_NUMBER,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "Upload artifacts run: ${process.env.WORKFLOW_LINK}"
+              body: "Upload artifacts run: ${workflowLink}"
             })
 
       - name: Authenticate with GCS
