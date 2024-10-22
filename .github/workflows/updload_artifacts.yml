@@ -42,7 +42,7 @@ jobs:
         run: |
           pr_number=$(gh pr list --head "${{ github.event.workflow_run.head_branch }}" --json number --jq '.[0].number')
           echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
-          echo "WORKFLOW_LINK=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          echo "WORKFLOW_LINK=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
           echo "The workflow run URL is: $GITHUB_RUN_URL"
 
       - name: Checkout repository
