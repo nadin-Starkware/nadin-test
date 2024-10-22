@@ -11,7 +11,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: set env vars
-        -env:
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # if: github.event.workflow_run.pull_requests != ''
         run: |
