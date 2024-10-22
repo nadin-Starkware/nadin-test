@@ -52,7 +52,7 @@ jobs:
       #   id: get_pr
       #   run: |
       #     pr=39
-      #     echo "PR_NUMBER=$pr" >> $GITHUB_ENV
+      #     echo "PR_NUMBER=$pr" >> $GITHUB_ENV test
       #     echo "pr num is: $pr"
 
       - name: Add a comment to the PR
