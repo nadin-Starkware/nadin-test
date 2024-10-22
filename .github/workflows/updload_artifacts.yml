@@ -13,10 +13,10 @@ jobs:
       - name: set env vars
           # if: github.event.workflow_run.pull_requests != ''
         run: |
+          echo "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
           pr_number=$(gh pr list --head "${{ github.event.workflow_run.head_branch }}" --json number --jq '.[0].number')
           echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
           echo "WORKFLOW_LINK=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
-          echo "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
           echo "The workflow run URL is: $GITHUB_RUN_URL"
 
       - name: Add a comment to the PR
