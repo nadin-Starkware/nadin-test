@@ -38,7 +38,7 @@ jobs:
             })
 
       - name: Commit hash - 1
-        # if: ${{ github.event_name == 'pull_request' }}
+        # if: ${{ github.event_name == 'pull_request' }} t
         env:
           COMMIT_SHA: ${{ github.event.workflow_run.head_commit.id }}
         run: |
